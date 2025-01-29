@@ -13,11 +13,30 @@ public class Diagnostico extends javax.swing.JFrame {
     /**
      * Creates new form Diagnostico
      */
+    private String resumenporcentaje;
+    private String resultadosintoma;
+    private String nombre;
+    
     public Diagnostico() {
         initComponents();
                 setLocationRelativeTo(null);
         setResizable(false);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    
+    public void porcentajeresumen(String resumenporcentaje){
+        this.resumenporcentaje = resumenporcentaje;
+        jLabel1.setText("<html>" + resumenporcentaje.replace("\n", "<br>") + "</html>");
+    }
+    
+    public void sintomaresultado(String resultadosintoma){
+        this.resultadosintoma = resultadosintoma;
+        jLabel8.setText("<html>" + resultadosintoma.replace("\n", "<br>") + "</html>");
+    }
+    
+    public void nombreobtener(String nombre){
+        this.nombre = nombre;
+        jLabel5.setText(nombre);
     }
 
     /**
@@ -38,57 +57,67 @@ public class Diagnostico extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(102, 204, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\diagnostico.jpg")); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 300, 200));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 230, 150));
 
         jLabel3.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        jLabel3.setText("DIAGNÓSTICO");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
+        jLabel3.setText("CONCLUSIONES:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         jButton1.setText("REGRESAR");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 230, 150));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 150));
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
-        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 230, 150));
+        jLabel5.setFont(new java.awt.Font("DialogInput", 3, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 480, 30));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
         jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 230, 150));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 230, 150));
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 230, 150));
+        jLabel8.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 230, 150));
+
+        jLabel9.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        jLabel9.setText("SUS RESULTADOS SON:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new Menu().setVisible(true);
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,5 +164,6 @@ public class Diagnostico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

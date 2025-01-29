@@ -20,6 +20,7 @@ public class Consulta extends javax.swing.JFrame {
     private ArrayList<String> sintomasIntolerancia = new ArrayList<>();
     private ArrayList<String> sintomasCancerEstomago = new ArrayList<>();
     private ArrayList<String> sintomasCancerColon = new ArrayList<>();
+    private String nombre;
     
     public Consulta() {
         initComponents();
@@ -46,13 +47,17 @@ public class Consulta extends javax.swing.JFrame {
         jButton2.addActionListener(e -> responder("No"));
     }
     
+    public void obtenernombre(String nombre){
+        this.nombre = nombre;
+    }
+    
     private void inicializarSintomas() {
         // Síntomas de intolerancia a la lactosa
         sintomasIntolerancia.add("¿Has sentido distensión?");
         sintomasIntolerancia.add("¿Padeces diarrea?");
         sintomasIntolerancia.add("¿Has tenido náuseas o vómitos?");
         sintomasIntolerancia.add("¿Has sentido dolor en el abdomen?");
-        sintomasIntolerancia.add("¿Tienes ruidos estomacales?");
+        sintomasIntolerancia.add("¿Tienes ruiditos estomacales?");
         sintomasIntolerancia.add("¿Has sentido hinchazón?");
         sintomasIntolerancia.add("¿Has tenido vómitos?");
 
@@ -90,7 +95,7 @@ public class Consulta extends javax.swing.JFrame {
          private void mostrarPregunta() {
     // Mostrar la pregunta actual en el jLabel2
     if (indicePregunta < preguntas.size()) {
-        jLabel2.setText(preguntas.get(indicePregunta));
+        jLabel2.setText("<html>" + preguntas.get(indicePregunta) + "</html>");
     } else {
         // Verificar si todas las respuestas son "Sí"
         boolean todasSi = respuestas.stream().allMatch(respuesta -> "Sí".equalsIgnoreCase(respuesta));
@@ -107,6 +112,9 @@ public class Consulta extends javax.swing.JFrame {
         } else {
             // Si no todas las respuestas son "Sí", mostrar diagnóstico
             StringBuilder resumen = new StringBuilder("Respuestas:\n");
+            StringBuilder resumenporcentaje = new StringBuilder("\nPorcentajes probables:");
+            String resultadosintoma = null;
+            
             for (int i = 0; i < preguntas.size(); i++) {
                 resumen.append(preguntas.get(i)).append(" Respuesta: ").append(respuestas.get(i)).append("\n");
             }
@@ -115,18 +123,55 @@ public class Consulta extends javax.swing.JFrame {
             double porcentajeIntolerancia = calcularPorcentaje(sintomasIntolerancia);
             double porcentajeCancerEstomago = calcularPorcentaje(sintomasCancerEstomago);
             double porcentajeCancerColon = calcularPorcentaje(sintomasCancerColon);
+            double porcentajeTotal = porcentajeIntolerancia + porcentajeCancerEstomago + porcentajeCancerColon;
+            
+            if (porcentajeIntolerancia > porcentajeCancerEstomago && porcentajeIntolerancia > porcentajeCancerColon)
+            {
+                resultadosintoma = "Usted puede padecer de: \nIntolerancia a la lactosa";
+            }
+            else if (porcentajeCancerEstomago > porcentajeIntolerancia && porcentajeCancerEstomago > porcentajeCancerColon)
+            {
+                resultadosintoma = "Usted puede padecer de: \nCáncer de estómago";
+            }
+            else if (porcentajeCancerColon > porcentajeIntolerancia && porcentajeCancerColon > porcentajeCancerEstomago)
+            {
+                resultadosintoma = "Usted puede padecer de: \nCáncer de colon";
+            }
+            else if (porcentajeIntolerancia == porcentajeCancerEstomago && porcentajeIntolerancia > porcentajeCancerColon)
+            {
+                resultadosintoma = "Usted puede estar padeciendo de: \nIntolerancia a la lactosa \nCáncer de estómago";
+            }
+            else if (porcentajeCancerEstomago == porcentajeCancerColon && porcentajeCancerEstomago > porcentajeIntolerancia)
+            {
+                resultadosintoma = "Usted puede estar padeciendo de: \nCáncer de estomago \nCáncer de colon";
+            }
+            else if (porcentajeIntolerancia == porcentajeCancerColon && porcentajeIntolerancia > porcentajeCancerEstomago)
+            {
+                resultadosintoma = "Usted puede estar padeciendo de: \nIntolerancia a la lactosa \nCáncer de colon";
+            }
+            
+            if (porcentajeTotal > 100.0)
+            {
+                JOptionPane.showMessageDialog(this, "Error con el cálculo de síntomas, vuelva a realizar el test");
+                reiniciarTest();
+            }
+            else
+            {
+                // Mostrar porcentajes en el resumen
+                resumenporcentaje.append("\n- Intolerancia a la lactosa: ").append(String.format("%.2f", porcentajeIntolerancia)).append("%");
+                resumenporcentaje.append("\n- Cáncer de estómago: ").append(String.format("%.2f", porcentajeCancerEstomago)).append("%");
+                resumenporcentaje.append("\n- Cáncer de colon: ").append(String.format("%.2f", porcentajeCancerColon)).append("%");
 
-            // Mostrar porcentajes en el resumen
-            resumen.append("\nPorcentajes probables:");
-            resumen.append("\n- Intolerancia a la lactosa: ").append(String.format("%.2f", porcentajeIntolerancia)).append("%");
-            resumen.append("\n- Cáncer de estómago: ").append(String.format("%.2f", porcentajeCancerEstomago)).append("%");
-            resumen.append("\n- Cáncer de colon: ").append(String.format("%.2f", porcentajeCancerColon)).append("%");
-
-            // Mostrar resumen al usuario
-            JOptionPane.showMessageDialog(this, resumen.toString(), "Resumen", JOptionPane.INFORMATION_MESSAGE);
-
-            new Diagnostico().setVisible(true);
-            this.dispose(); // Cerrar el JFrame actual
+                // Mostrar resumen al usuario
+                JOptionPane.showMessageDialog(this, resumen.toString(), "Resumen", JOptionPane.INFORMATION_MESSAGE);
+                
+                Diagnostico diagnostico = new Diagnostico();
+                diagnostico.porcentajeresumen(resumenporcentaje.toString());
+                diagnostico.sintomaresultado(resultadosintoma);
+                diagnostico.nombreobtener(nombre);
+                diagnostico.setVisible(true);
+                this.dispose(); // Cerrar el JFrame actual
+            }
         }
     }
 }
@@ -185,7 +230,7 @@ private void reiniciarTest() {
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 610, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 610, 50));
 
         jButton1.setBackground(new java.awt.Color(102, 255, 102));
         jButton1.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
@@ -198,21 +243,17 @@ private void reiniciarTest() {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, 50));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\02_Jun_2012_14_26_08_house1.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 640, 350));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 150));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
         jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 230, 150));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\joels\\Downloads\\pared.jpg")); // NOI18N
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 230, 150));
 

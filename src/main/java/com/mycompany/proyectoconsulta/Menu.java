@@ -15,12 +15,16 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    public String nombre;
+    
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        animateLabels(); 
+        animateLabels();
+        jLabel7.setVisible(false);
+        jButton3.setVisible(false);
     }
     
     private void animateLabels() {
@@ -30,8 +34,9 @@ public class Menu extends javax.swing.JFrame {
         // Hacer que jLabel4 aparezca lentamente
         animateLabel(jLabel4);
         
-        
         animateLabel(jLabel7);
+        
+        animateLabel(jLabel8);
     }
 
      
@@ -71,13 +76,16 @@ private void setLabelOpacity(JLabel label, float opacity) {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,31 +95,19 @@ private void setLabelOpacity(JLabel label, float opacity) {
         jLabel3.setText("MI CONSULTORÍA");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("DialogInput", 3, 14)); // NOI18N
-        jLabel2.setText("En este lugar le haremos unas preguntas");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
-
         jLabel4.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jLabel4.setText("Y así determinaremos su posible enfermedad");
+        jLabel4.setText("Y así determinaremos su posible enfermedad.");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 20));
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 204));
-        jButton1.setText("CONTINUAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, -1, -1));
-
         jButton2.setBackground(new java.awt.Color(255, 153, 153));
+        jButton2.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
         jButton2.setText("SALIR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
         jLabel5.setText("Y así determinaremos su posible enfermedad");
@@ -125,6 +121,37 @@ private void setLabelOpacity(JLabel label, float opacity) {
         jLabel7.setText("CONTESTA CON SINCERIDAD");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
 
+        jLabel8.setFont(new java.awt.Font("DialogInput", 3, 14)); // NOI18N
+        jLabel8.setText("En este lugar le haremos unas preguntas");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
+
+        jTextField1.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 290, -1));
+
+        jLabel2.setFont(new java.awt.Font("DialogInput", 3, 14)); // NOI18N
+        jLabel2.setText("Ingrese su nombre:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(204, 255, 204));
+        jButton1.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        jButton1.setText("INGRESAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(204, 255, 204));
+        jButton3.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        jButton3.setText("CONTINUAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/proyectoconsulta/pngtree-an-image-of-an-empty-hospital-corridor-picture-image_2741570.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -132,23 +159,29 @@ private void setLabelOpacity(JLabel label, float opacity) {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       jButtonConsultaActionPerformed(evt);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButtonConsultaActionPerformed(java.awt.event.ActionEvent evt) {
-    // Crear y mostrar el formulario de Consulta
-    new Consulta().setVisible(true);
-    // Cerrar el formulario actual (Menu)
-    this.setVisible(false);
-}
-
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        nombre = jTextField1.getText();
+        jButton3.setVisible(true);
+        jLabel7.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jButtonConsultaActionPerformed(evt);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonConsultaActionPerformed(java.awt.event.ActionEvent evt) {
+    // Crear y mostrar el formulario de Consulta
+    Consulta consulta = new Consulta();
+    consulta.obtenernombre(nombre);
+    consulta.setVisible(true);
+    // Cerrar el formulario actual (Menu)
+    this.setVisible(false);
+}
     /**
      * @param args the command line arguments
      */
@@ -187,6 +220,7 @@ private void setLabelOpacity(JLabel label, float opacity) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -194,5 +228,7 @@ private void setLabelOpacity(JLabel label, float opacity) {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
