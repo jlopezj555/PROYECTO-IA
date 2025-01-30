@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.proyectoconsulta;
-
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 /**
  *
  * @author joels
@@ -17,12 +19,48 @@ public class Diagnostico extends javax.swing.JFrame {
     private String resultadosintoma;
     private String nombre;
     
+     private Timer timer1, timer2, timer3, timer4;
+    private int alphaPanel1 = 0, alphaPanel2 = 0, alphaLabel1 = 0, alphaLabel8 = 0; // Control de opacidad
+
+    
     public Diagnostico() {
         initComponents();
                 setLocationRelativeTo(null);
         setResizable(false);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+    
+        private void animateLabels() {
+        
+        animateLabel(jLabel1);
+        
+        animateLabel(jLabel8);
+        
+        
+    }
+        
+     private void animateLabel(JLabel label) {
+        Timer timer = new Timer(50, e -> {  // Aumentamos el intervalo a 50ms
+            // Obtener el valor actual de opacidad
+            float currentOpacity = (float) label.getClientProperty("opacity");
+            if (currentOpacity < 1.0f) {
+                // Incrementar la opacidad poco a poco
+                label.putClientProperty("opacity", currentOpacity + 0.02f);  // Aumento más gradual
+                // Establecer la nueva opacidad en el componente
+                setLabelOpacity(label, currentOpacity + 0.02f);
+            } else {
+                ((Timer) e.getSource()).stop(); // Detener el timer cuando la opacidad alcance 1
+            }
+        });
+        label.putClientProperty("opacity", 0.0f); // Inicializar opacidad en 0
+        timer.start(); // Iniciar el timer
+    }
+    
+     private void setLabelOpacity(JLabel label, float opacity) {
+    // Asegúrate de que la opacidad esté entre 0 y 1 antes de multiplicar por 255
+    int alpha = (int) (Math.min(1.0f, Math.max(0.0f, opacity)) * 255);  // Restringir el valor entre 0 y 255
+    label.setForeground(new Color(0, 0, 0, alpha));  // Establecer la opacidad correctamente
+}
     
     public void porcentajeresumen(String resumenporcentaje){
         this.resumenporcentaje = resumenporcentaje;
@@ -55,9 +93,12 @@ public class Diagnostico extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -69,8 +110,9 @@ public class Diagnostico extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 230, 150));
 
         jLabel3.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(242, 242, 242));
         jLabel3.setText("CONCLUSIONES:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
@@ -80,35 +122,51 @@ public class Diagnostico extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, -1, -1));
 
+        jLabel2.setForeground(new java.awt.Color(255, 102, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 230, 150));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 230, 150));
 
+        jLabel4.setForeground(new java.awt.Color(242, 242, 242));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 150));
 
-        jLabel5.setFont(new java.awt.Font("DialogInput", 3, 12)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 480, 30));
+        jLabel5.setFont(new java.awt.Font("DialogInput", 3, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 30));
 
+        jLabel6.setForeground(new java.awt.Color(242, 242, 242));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 230, 150));
 
+        jLabel8.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 230, 190));
+
+        jLabel7.setForeground(new java.awt.Color(242, 242, 242));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 230, 150));
 
-        jLabel8.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 230, 150));
-
         jLabel9.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(242, 242, 242));
         jLabel9.setText("SUS RESULTADOS SON:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 230, 190));
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 230, 190));
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/diagnostico.jpg"))); // NOI18N
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -157,6 +215,7 @@ public class Diagnostico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -165,5 +224,7 @@ public class Diagnostico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

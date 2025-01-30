@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.mycompany.proyectoconsulta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -9,18 +6,27 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
- * @author joels
+ * @author pcita
  */
 public class Consulta extends javax.swing.JFrame {
     private ArrayList<String> preguntas = new ArrayList<>();
-    private ArrayList<String> respuestas = new ArrayList<>();
+    private ArrayList<String> respuestas = new ArrayList<>();   
     private int indicePregunta = 0;
     
      // Listas de síntomas por enfermedad
     private ArrayList<String> sintomasIntolerancia = new ArrayList<>();
     private ArrayList<String> sintomasCancerEstomago = new ArrayList<>();
     private ArrayList<String> sintomasCancerColon = new ArrayList<>();
+    private ArrayList<String> sintomasComunes = new ArrayList<>();
+    
+    //Nuevos ArrayList
+    private ArrayList<String> sintomasIntoEstomago = new ArrayList<>();
+    private ArrayList<String> sintomasIntoColon = new ArrayList<>();
+    private ArrayList<String> sintomasEstoColon = new ArrayList<>();
+    
     private String nombre;
+    private String edad;
+    private String genero;
     
     public Consulta() {
         initComponents();
@@ -52,44 +58,57 @@ public class Consulta extends javax.swing.JFrame {
     }
     
     private void inicializarSintomas() {
+        //Sintomas de dos enfermedades 
+        //CANCER DE ESTOMAGO Y COLON
+        sintomasEstoColon.add("¿Ha padecido de sangrado al ir al baño?");
+        sintomasEstoColon.add("¿Ha perdido más peso de lo normal últimamente?");
+        
+        
+        //CANCER DE ESTOMAGO E INTOLERANCIA A LA LACTOSA
+        sintomasIntoEstomago.add("¿Se ha sentido hinchado o con distensión?");
+        sintomasIntoEstomago.add("¿Ha sentido acidez o 'gruñidos' estomacales?");
+        sintomasIntoEstomago.add("¿Sufre náuseas o vómitos últimamente?");
+        
+        //CANCER DE COLON E INTOLERANCIA A LA LACTOSA
+        sintomasIntoColon.add("¿Ha sufrido de diarrea estos dias?");
+        sintomasIntoColon.add("¿Padece de dolores abdominales estos días?");
+        
+        // Síntomas comunes
+        sintomasComunes.add("¿Sufre de estreñimiento?");
+        sintomasComunes.add("¿Tiene o ha tenido incontinencia?");
+        sintomasComunes.add("¿Ha tenido cambios abruptos en su peso?");
+
+        
         // Síntomas de intolerancia a la lactosa
-        sintomasIntolerancia.add("¿Has sentido distensión?");
-        sintomasIntolerancia.add("¿Padeces diarrea?");
-        sintomasIntolerancia.add("¿Has tenido náuseas o vómitos?");
-        sintomasIntolerancia.add("¿Has sentido dolor en el abdomen?");
-        sintomasIntolerancia.add("¿Tienes ruiditos estomacales?");
-        sintomasIntolerancia.add("¿Has sentido hinchazón?");
-        sintomasIntolerancia.add("¿Has tenido vómitos?");
+        sintomasIntolerancia.add("¿Ha sentido que tiene gases últimamente?");
+        sintomasIntolerancia.add("¿Ha sentido o siente ruidos estomacales?");
+
 
         // Síntomas de cáncer de estómago
-        sintomasCancerEstomago.add("¿Has tenido náuseas o vómitos?");
-        sintomasCancerEstomago.add("¿Sientes acidez?");
-        sintomasCancerEstomago.add("¿Has tenido problemas para tragar?");
-        sintomasCancerEstomago.add("¿Has sentido dolor en el abdomen?");
-        sintomasCancerEstomago.add("¿Has tenido sangrado últimamente?");
-        sintomasCancerEstomago.add("¿Has perdido peso?");
-        sintomasCancerEstomago.add("¿Tienes fatiga excesiva?");
-        sintomasCancerEstomago.add("¿Tienes piel u ojos amarillos?");
-        sintomasCancerEstomago.add("¿Has perdido el apetito?");
-        sintomasCancerEstomago.add("¿Sientes hinchazón constante?");
+        sintomasCancerEstomago.add("¿Ha tenido un cambio de color de piel, específicamente a amarillo?");
+        sintomasCancerEstomago.add("¿Ha tenido o ha padecido de icteria?");
+        sintomasCancerEstomago.add("¿Ha perdido la sensación del apetito?");
+        sintomasCancerEstomago.add("¿Ha tenido los ojos amarillos?");       
+        sintomasCancerEstomago.add("¿Ha sentido una fatiga excesiva?");
+        sintomasCancerEstomago.add("¿Ha tenido o tiene problemas para tragar?");
 
         // Síntomas de cáncer de colon
-        sintomasCancerColon.add("¿Te has sentido estreñido?");
-        sintomasCancerColon.add("¿Padeces diarrea?");
-        sintomasCancerColon.add("¿Has sentido dolor en el abdomen?");
-        sintomasCancerColon.add("¿Has tenido sangrado últimamente?");
-        sintomasCancerColon.add("¿Sientes calambres abdominales?");
-        sintomasCancerColon.add("¿Sientes debilidad o fatiga?");
-        sintomasCancerColon.add("¿Has tenido una sensación de querer ir al baño sin alivio?");
+        sintomasCancerColon.add("¿Ha sentido querer ir al baño aunque ya haya ido varias veces?");
+        sintomasCancerColon.add("¿Ha sentido fatiga no de forma excesiva?");
+        sintomasCancerColon.add("¿Ha visto estrechamiento en las heces cuando va al baño?");
+
     }
     
        private void inicializarPreguntas() {
         // Agregar todos los síntomas (sin duplicar preguntas)
+        preguntas.addAll(sintomasComunes);
         preguntas.addAll(sintomasIntolerancia);
         preguntas.addAll(sintomasCancerEstomago);
         preguntas.addAll(sintomasCancerColon);
+        preguntas.addAll(sintomasIntoEstomago);
+        preguntas.addAll(sintomasIntoColon);
+        preguntas.addAll(sintomasEstoColon);
 
-        // Eliminar duplicados (ya que algunos síntomas son comunes entre enfermedades)
         preguntas = new ArrayList<>(new java.util.LinkedHashSet<>(preguntas));
     }
          private void mostrarPregunta() {
@@ -103,7 +122,7 @@ public class Consulta extends javax.swing.JFrame {
         if (todasSi) {
             JOptionPane.showMessageDialog(
                 this,
-                "Has respondido 'Sí' a todas las preguntas. Te recomendamos volver a realizar el test.",
+                "Has respondido 'Sí' a todas las preguntas, vuelva a realizar el test.",
                 "Aviso",
                 JOptionPane.WARNING_MESSAGE
             );
@@ -120,10 +139,17 @@ public class Consulta extends javax.swing.JFrame {
             }
 
             // Calcular porcentajes por enfermedad
-            double porcentajeIntolerancia = calcularPorcentaje(sintomasIntolerancia);
-            double porcentajeCancerEstomago = calcularPorcentaje(sintomasCancerEstomago);
-            double porcentajeCancerColon = calcularPorcentaje(sintomasCancerColon);
-            double porcentajeTotal = porcentajeIntolerancia + porcentajeCancerEstomago + porcentajeCancerColon;
+            double porcentajeIntolerancia = calcularPorcentaje(sintomasIntolerancia, sintomasComunes, sintomasIntoEstomago, sintomasIntoColon);
+            double porcentajeCancerEstomago = calcularPorcentaje(sintomasCancerEstomago, sintomasComunes, sintomasIntoEstomago, sintomasEstoColon);
+            double porcentajeCancerColon = calcularPorcentaje(sintomasCancerColon, sintomasComunes, sintomasEstoColon, sintomasIntoColon);
+            
+            
+            
+            
+            
+            
+            double porcentajeTotal = porcentajeIntolerancia + porcentajeCancerEstomago + porcentajeCancerColon
+                    ;
             
             if (porcentajeIntolerancia > porcentajeCancerEstomago && porcentajeIntolerancia > porcentajeCancerColon)
             {
@@ -141,7 +167,15 @@ public class Consulta extends javax.swing.JFrame {
             {
                 resultadosintoma = "Usted puede estar padeciendo de: \nIntolerancia a la lactosa \nCáncer de estómago";
             }
+            else if (porcentajeIntolerancia > porcentajeCancerEstomago && porcentajeCancerEstomago > porcentajeCancerColon)
+            {
+                resultadosintoma = "Usted puede estar padeciendo de: \nIntolerancia a la lactosa \nCáncer de estómago";
+            }
             else if (porcentajeCancerEstomago == porcentajeCancerColon && porcentajeCancerEstomago > porcentajeIntolerancia)
+            {
+                resultadosintoma = "Usted puede estar padeciendo de: \nCáncer de estomago \nCáncer de colon";
+            }
+            else if (porcentajeCancerEstomago > porcentajeCancerColon && porcentajeCancerEstomago > porcentajeIntolerancia)
             {
                 resultadosintoma = "Usted puede estar padeciendo de: \nCáncer de estomago \nCáncer de colon";
             }
@@ -149,10 +183,27 @@ public class Consulta extends javax.swing.JFrame {
             {
                 resultadosintoma = "Usted puede estar padeciendo de: \nIntolerancia a la lactosa \nCáncer de colon";
             }
-            
-            if (porcentajeTotal > 100.0)
+            else if (porcentajeIntolerancia > porcentajeCancerColon && porcentajeCancerColon > porcentajeCancerEstomago)
             {
-                JOptionPane.showMessageDialog(this, "Error con el cálculo de síntomas, vuelva a realizar el test");
+                resultadosintoma = "Usted puede estar padeciendo de: \nIntolerancia a la lactosa \nCáncer de colon";
+            }
+            
+            else if (porcentajeIntolerancia == porcentajeCancerColon && porcentajeIntolerancia == porcentajeCancerEstomago)
+            {
+                resultadosintoma = "Usted puede estar padeciendo de: \nIntolerancia a la lactosa \nCáncer de estómago \nCáncer de colon";
+            }
+            
+            if (porcentajeIntolerancia > 100.0 || porcentajeCancerEstomago > 100.0 || porcentajeCancerColon > 100.0)
+            {
+                JOptionPane.showMessageDialog(this, "Las probabilidades superaron el 100%, vuelva a realizar el test.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                reiniciarTest();
+            }
+            
+
+            
+            else if (porcentajeTotal == 0.0)
+            {
+                JOptionPane.showMessageDialog(this, "Ha respondido 'No' en todas las preguntas, vuelva a realizar el test.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 reiniciarTest();
             }
             else
@@ -184,14 +235,46 @@ private void reiniciarTest() {
 }
 
 
-    private double calcularPorcentaje(ArrayList<String> sintomasEspecificos) {
-        int coincidencias = 0;
+    private double calcularPorcentaje(ArrayList<String> sintomasEspecificos, ArrayList<String> sintomasComunes, 
+            ArrayList<String> sintomasMixtos1, ArrayList<String> sintomasMixtos2) {
+        int coincidenciaesp = 0;
+        int coincidenciacom = 0;
+        int coincidenciamix1 = 0;
+        int coincidenciamix2 = 0;
+        int coincidenciatot;
+        int sintomastot;
+       // double porcentajeesp;
+        double porcentajetot;
         for (int i = 0; i < preguntas.size(); i++) {
             if (sintomasEspecificos.contains(preguntas.get(i)) && "Sí".equalsIgnoreCase(respuestas.get(i))) {
-                coincidencias++;
+                coincidenciaesp++;
             }
         }
-        return (coincidencias * 100.0) / sintomasEspecificos.size();
+        
+        for (int i = 0; i < preguntas.size(); i++) {
+            if (sintomasComunes.contains(preguntas.get(i)) && "Sí".equalsIgnoreCase(respuestas.get(i))) {
+                coincidenciacom++;
+            }
+        }
+        
+        for (int i = 0; i < preguntas.size(); i++) {
+            if (sintomasMixtos1.contains(preguntas.get(i)) && "Sí".equalsIgnoreCase(respuestas.get(i))) {
+                coincidenciamix1++;
+            }
+        }
+        
+        for (int i = 0; i < preguntas.size(); i++) {
+            if (sintomasMixtos2.contains(preguntas.get(i)) && "Sí".equalsIgnoreCase(respuestas.get(i))) {
+                coincidenciamix2++;
+            }
+        }
+        coincidenciatot = coincidenciacom + coincidenciaesp + coincidenciamix1 + coincidenciamix2;
+        sintomastot = sintomasEspecificos.size() + sintomasComunes.size() + sintomasMixtos1.size() + sintomasMixtos2.size();
+        //calculo el porcentaje
+        
+        porcentajetot = (coincidenciatot * 100.0)/sintomastot;
+        
+        return porcentajetot;
     }
       
   private void responder(String respuesta) {
@@ -243,6 +326,7 @@ private void reiniciarTest() {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, 50));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/02_Jun_2012_14_26_08_house1_1.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 640, 350));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);

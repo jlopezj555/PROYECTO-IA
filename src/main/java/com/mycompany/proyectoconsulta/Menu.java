@@ -28,15 +28,18 @@ public class Menu extends javax.swing.JFrame {
     }
     
     private void animateLabels() {
+        
+        animateLabel(jLabel3);
         // Hacer que jLabel2 aparezca lentamente
         animateLabel(jLabel2);
         
         // Hacer que jLabel4 aparezca lentamente
         animateLabel(jLabel4);
         
-        animateLabel(jLabel7);
         
         animateLabel(jLabel8);
+        
+        
     }
 
      
@@ -78,8 +81,6 @@ private void setLabelOpacity(JLabel label, float opacity) {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -91,13 +92,13 @@ private void setLabelOpacity(JLabel label, float opacity) {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
-        jLabel3.setText("MI CONSULTORÍA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
+        jLabel3.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
+        jLabel3.setText("Y así determinaremos su posible enfermedad.");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jLabel4.setText("Y así determinaremos su posible enfermedad.");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 20));
+        jLabel4.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel4.setText("MI CONSULTORÍA");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, 20));
 
         jButton2.setBackground(new java.awt.Color(255, 153, 153));
         jButton2.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
@@ -109,17 +110,9 @@ private void setLabelOpacity(JLabel label, float opacity) {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jLabel5.setText("Y así determinaremos su posible enfermedad");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 20));
-
-        jLabel6.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jLabel6.setText("Y así determinaremos su posible enfermedad");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 20));
-
         jLabel7.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
-        jLabel7.setText("CONTESTA CON SINCERIDAD");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
+        jLabel7.setText("PRESIONE EL BOTON");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 160, -1));
 
         jLabel8.setFont(new java.awt.Font("DialogInput", 3, 14)); // NOI18N
         jLabel8.setText("En este lugar le haremos unas preguntas");
@@ -153,8 +146,7 @@ private void setLabelOpacity(JLabel label, float opacity) {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/proyectoconsulta/pngtree-an-image-of-an-empty-hospital-corridor-picture-image_2741570.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pngtree-an-image-of-an-empty-hospital-corridor-picture-image_2741570.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 578, 400));
 
         pack();
@@ -225,8 +217,6 @@ private void setLabelOpacity(JLabel label, float opacity) {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
